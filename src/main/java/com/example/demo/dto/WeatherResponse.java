@@ -6,5 +6,5 @@ import lombok.Data;
 public class WeatherResponse {
 	private String cityName;
 	
-	private CUrrentWeather current;
+	private CurrentWeather current;
 }

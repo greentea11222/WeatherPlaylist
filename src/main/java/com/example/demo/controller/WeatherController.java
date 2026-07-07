@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.Playlist;
-import com.example.demo.dto.WeatherDetail;
 import com.example.demo.dto.WeatherResponse;
 import com.example.demo.service.WeatherService;
 
@@ -28,11 +27,16 @@ public class WeatherController {
 		//都市名を使って、天気サービスから全体のレスポンスを取得する
 		WeatherResponse response = weatherService.getWeather(cityName);
 		
-		//レスポンスから、時間ごとの天気リストを取得
-		List<WeatherDetail> weatherList = response.getWeatherList();
+		//天気コード（数字）を取得
+		int weatherCode = response.getCurrent().getWeatherCode();
+		//天気（文字列）
+		String currentStatus;
 		
-		//リストの先頭のデータからstatusを取得
-		String currentStatus = weatherList.get(0).getStatus();
+		if (weatherCode == 61) {
+			currentStatus = "RAINY"; 
+		} else {
+			currentStatus = "SUNNY";
+		}
 		
 		//全てのプレイリスト一覧を作成
 		List<Playlist> allPlaylists = new ArrayList<Playlist>();
