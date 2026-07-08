@@ -10,7 +10,7 @@ public class WeatherService {
 	public WeatherResponse getWeather(String cityName) {
 		
 		//外部のお天気API（Open-Meteo)のURL
-		String url = "https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&current=temperature_2m,weather_code&timezone=Asia%2FTokyo";
+		String url = "https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&current=temperature_2m,weather_code&timezone=Asia/Tokyo";
 		
 		//通信を行うためのRestTemplateインスタンスを生成
 		RestTemplate restTemplate = new RestTemplate();
