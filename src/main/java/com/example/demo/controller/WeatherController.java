@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.Music;
 import com.example.demo.dto.Playlist;
 import com.example.demo.dto.WeatherResponse;
 import com.example.demo.service.WeatherService;
@@ -40,6 +41,11 @@ public class WeatherController {
 		
 		//全てのプレイリスト一覧を作成
 		List<Playlist> allPlaylists = new ArrayList<Playlist>();
+		
+		Music music1 = new Music();
+		music1.setTitle("Adventure");
+		music1.setArtist("はるかぜ");
+		
 		
 		//ダミーのプレイリストを作成して一覧に格納
 		Playlist list1 = new Playlist();
