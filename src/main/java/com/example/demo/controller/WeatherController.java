@@ -42,17 +42,46 @@ public class WeatherController {
 		//全てのプレイリスト一覧を作成
 		List<Playlist> allPlaylists = new ArrayList<Playlist>();
 		
+		// 1曲ずつ曲のインスタンスを作る
 		Music music1 = new Music();
 		music1.setTitle("Adventure");
 		music1.setArtist("はるかぜ");
 		
+		Music music2 = new Music();
+		music2.setTitle("Sunny Day");
+		music2.setArtist("Blue Sky");
 		
-		//ダミーのプレイリストを作成して一覧に格納
+		// 曲のリストを作成し、作った曲を詰める
+		List<Music> sunnyMusicList = new ArrayList<>();
+		sunnyMusicList.add(music1);
+		sunnyMusicList.add(music2);
+		
+		// プレイリストのインスタンスを作り、タイトル・天気・曲リストをセットする
 		Playlist list1 = new Playlist();
+		list1.setTitle("晴れやか爽快ポップス");
 		list1.setStatus("SUNNY");
-		Playlist list2 = new Playlist();
-		list2.setStatus("RAINY");
+		list1.setMusicList(sunnyMusicList);
 		allPlaylists.add(list1);
+		
+		// 1曲ずつ曲のインスタンスを作る
+		Music music3 = new Music();
+		music3.setTitle("Rain");
+		music3.setArtist("たっぽう");
+		
+		Music music4 = new Music();
+		music4.setTitle("雨の午後");
+		music4.setArtist("Grayyyy");
+		
+		// 曲のリストを作成し、作った曲を詰める
+		List<Music> rainyMusicList = new ArrayList<>();
+		rainyMusicList.add(music3);
+		rainyMusicList.add(music4);
+		
+		// プレイリストのインスタンスを作り、タイトル・天気・曲リストをセットする
+		Playlist list2 = new Playlist();
+		list2.setTitle("雨の日の曲");
+		list2.setStatus("RAINY");
+		list2.setMusicList(rainyMusicList);
 		allPlaylists.add(list2);
 		
 		//全てのプレイリストから、天気が一致するものを絞り込む
