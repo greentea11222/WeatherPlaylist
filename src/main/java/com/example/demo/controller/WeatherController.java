@@ -22,7 +22,7 @@ public class WeatherController {
 	@Autowired
 	private WeatherService weatherService;
 	
-	@GetMapping("/recommend")
+	@GetMapping(value = "/recommend", produces = "application/json;charset=UTF-8")
 	public List<Playlist> getRecommendPlaylists(@RequestParam("city") String cityName){
 		
 		//都市名を使って、天気サービスから全体のレスポンスを取得する
