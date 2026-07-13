@@ -46,10 +46,12 @@ public class WeatherController {
 		Music music1 = new Music();
 		music1.setTitle("Adventure");
 		music1.setArtist("はるかぜ");
+		music1.setYoutubeUrl("https://www.youtube.com/results?search_query=Adventure+はるかぜ");
 		
 		Music music2 = new Music();
 		music2.setTitle("Sunny Day");
 		music2.setArtist("Blue Sky");
+		music2.setYoutubeUrl("https://www.youtube.com/results?search_query=Sunny+Day+Blue+Sky");
 		
 		// 曲のリストを作成し、作った曲を詰める
 		List<Music> sunnyMusicList = new ArrayList<>();
@@ -66,11 +68,13 @@ public class WeatherController {
 		// 1曲ずつ曲のインスタンスを作る
 		Music music3 = new Music();
 		music3.setTitle("Rain");
-		music3.setArtist("たっぽう");
+		music3.setArtist("雨");
+		music3.setYoutubeUrl("https://www.youtube.com/results?search_query=Rain+雨");
 		
 		Music music4 = new Music();
 		music4.setTitle("雨の午後");
 		music4.setArtist("Grayyyy");
+		music4.setYoutubeUrl("https://www.youtube.com/results?search_query=雨の午後+Grayyyy");
 		
 		// 曲のリストを作成し、作った曲を詰める
 		List<Music> rainyMusicList = new ArrayList<>();

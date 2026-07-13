@@ -9,4 +9,7 @@ public class Music {
 	
 	//アーティスト
 	private String artist;
+	
+	// YouTubeのリンク
+	private String youtubeUrl;
 }
