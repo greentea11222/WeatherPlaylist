@@ -12,6 +12,8 @@
 	</style>
 </head>
 <body>
-	
+	<div class="playlist-card" th:each="playlist: ${playlists}">
+		<h2 th:text="${playlist.title}"プレイリスト名></h2>
+	</div>
 </body>
 </html>
