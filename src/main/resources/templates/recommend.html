@@ -14,6 +14,18 @@
 <body>
 	<div class="playlist-card" th:each="playlist: ${playlists}">
 		<h2 th:text="${playlist.title}"プレイリスト名></h2>
+		<p>現在の気分：<span th:text="${playlist.status}" style="font-weight: bold; color: #3182ce">STATUS</span></p>
+		<hr>
+		
+		<div>
+			<div class="music-item" th:each="music : ${plaulist.musicList}">
+				<div style="text-align: left;">
+					<string th:text="${music.title}">曲名</string><br>
+					<small th:text="${music.artist}" style="color: #666">アーティスト</small>
+				</div>
+				<a th:href="${music.youtubeUrl}" target="_blank" class="play-btn">再生</a>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
