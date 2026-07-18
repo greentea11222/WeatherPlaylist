@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.Music;
 import com.example.demo.dto.Playlist;
 import com.example.demo.dto.WeatherResponse;
 import com.example.demo.service.WeatherService;
 
-@RestController
+@Controller
 @RequestMapping("/api")
 public class WeatherController {
 	
@@ -22,8 +22,8 @@ public class WeatherController {
 	@Autowired
 	private WeatherService weatherService;
 	
-	@GetMapping(value = "/recommend", produces = "application/json;charset=UTF-8")
-	public List<Playlist> getRecommendPlaylists(@RequestParam("city") String cityName){
+	@GetMapping(value = "/recommend-view")
+	public String getRecommendView(@RequestParam("city") String cityName, org.springframework.ui.Model model){
 		
 		//都市名を使って、天気サービスから全体のレスポンスを取得する
 		WeatherResponse response = weatherService.getWeather(cityName);
@@ -93,7 +93,10 @@ public class WeatherController {
 				.filter(playlist -> playlist.getStatus().equals(currentStatus))
 				.toList();
 		
-		//絞り込んだプレイリストを返却
-		return matchedPlaylists;
+		// 画面（HTML）にデータを渡す
+		model.addAttribute("playlists", matchedPlaylists);
+		
+		// templates/recommend.htmlを表示する
+		return "recommend";
 	}
 }
