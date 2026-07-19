@@ -30,15 +30,26 @@ public class WeatherController {
 		
 		//天気コード（数字）を取得
 		int weatherCode = response.getCurrent().getWeatherCode();
-		//天気（文字列）
-		String currentStatus;
 		
-		if (weatherCode == 61) {
-			currentStatus = "RAINY"; 
-		} else {
-			currentStatus = "SUNNY";
-		}
+		//コードから天気を判定
+		String currentStatus = switch (weatherCode) {
 		
+		// 晴れ
+		case 0, 1, 2, 3 -> "SUNNY";
+		
+		// 霧
+		case 45, 48 -> "FOGGY";
+		
+		// 雨
+		case 51, 53, 55, 61, 63, 65, 80, 81, 82 -> "RAINY";
+		
+		// 雪
+		case 71, 73, 75, 85, 86 -> "SNOWY";
+		
+		// その他
+		default -> "SUNNY";
+		
+		};
 		//全てのプレイリスト一覧を作成
 		List<Playlist> allPlaylists = new ArrayList<Playlist>();
 		

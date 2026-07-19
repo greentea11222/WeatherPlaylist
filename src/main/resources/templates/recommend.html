@@ -18,7 +18,7 @@
 		<hr>
 		
 		<div>
-			<div class="music-item" th:each="music : ${plaulist.musicList}">
+			<div class="music-item" th:each="music : ${playlist.musicList}">
 				<div style="text-align: left;">
 					<string th:text="${music.title}">曲名</string><br>
 					<small th:text="${music.artist}" style="color: #666">アーティスト</small>
