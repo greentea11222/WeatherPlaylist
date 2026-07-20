@@ -99,6 +99,21 @@ public class WeatherController {
 		list2.setMusicList(rainyMusicList);
 		allPlaylists.add(list2);
 		
+		// 霧の日用プレイリスト
+		Music music5 = new Music();
+		music5.setTitle("Misty Road");
+		music5.setArtist("Lo-Fi Chill");
+		music5.setYoutubeUrl("https://www.youtube.com/results?search_query=Misty+Road+Lo-Fi+Chill");
+		
+		List<Music> foggyMusicList = new ArrayList();
+		foggyMusicList.add(music5);
+		
+		Playlist list3 = new Playlist();
+		list3.setTitle("幻想的な霧のロファイ");
+		list3.setStatus("FOGGY");
+		list3.setMusicList(foggyMusicList);
+		allPlaylists.add(list3);
+		
 		//全てのプレイリストから、天気が一致するものを絞り込む
 		List<Playlist> matchedPlaylists = allPlaylists.stream()
 				.filter(playlist -> playlist.getStatus().equals(currentStatus))
