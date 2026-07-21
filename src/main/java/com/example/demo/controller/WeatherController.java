@@ -114,6 +114,21 @@ public class WeatherController {
 		list3.setMusicList(foggyMusicList);
 		allPlaylists.add(list3);
 		
+		// 雪の日用
+		Music music6 = new Music();
+		music6.setTitle("White Magic");
+		music6.setArtist("しんしん");
+		music6.setYoutubeUrl("https://www.youtube.com/results?search_query=Winter+Magic+しんしん");
+		
+		List<Music> snowyMusicList = new ArrayList<>();
+		snowyMusicList.add(music6);
+		
+		Playlist list4 = new Playlist();
+		list4.setTitle("しんしんと降る雪のバラード");
+		list4.setStatus("SNOWY");
+		list4.setMusicList(snowyMusicList);
+		allPlaylists.add(list4);
+		
 		//全てのプレイリストから、天気が一致するものを絞り込む
 		List<Playlist> matchedPlaylists = allPlaylists.stream()
 				.filter(playlist -> playlist.getStatus().equals(currentStatus))
