@@ -31,6 +31,9 @@ public class WeatherController {
 		//天気コード（数字）を取得
 		int weatherCode = response.getCurrent().getWeatherCode();
 		
+		// 気温を取得
+		double temperature = response.getCurrent().getTemperature();
+		
 		//コードから天気を判定
 		String currentStatus = switch (weatherCode) {
 		
@@ -135,6 +138,9 @@ public class WeatherController {
 				.toList();
 		
 		// 画面（HTML）にデータを渡す
+		model.addAttribute("cityName", cityName);
+		model.addAttribute("temperature", temperature);
+		model.addAttribute("currentStatus", currentStatus);
 		model.addAttribute("playlists", matchedPlaylists);
 		
 		// templates/recommend.htmlを表示する
