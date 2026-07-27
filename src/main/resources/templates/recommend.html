@@ -32,6 +32,17 @@
 	</style>
 </head>
 <body>
+	<!-- 気温・都市名を表示するヘッダーエリア -->
+	<div class="weather-header">
+		<h1 th:text="${cityName} + ' の現在の天気'">Tokyo の現在の天気</h1>
+		<div class="weather-info">
+			状態：<span th:text="${currentStatus}" style="font-weight: bold;">SUNNY</span>
+		</div>
+		<div class="temp">
+			<span th:text="${temperature}">25.0</span>
+		</div>
+	</div>
+	<!-- プレイリストエリア -->
 	<div class="playlist-card" th:each="playlist: ${playlists}">
 		<h2 th:text="${playlist.title}"プレイリスト名></h2>
 		<p>現在の気分：<span th:text="${playlist.status}" style="font-weight: bold; color: #3182ce">STATUS</span></p>
