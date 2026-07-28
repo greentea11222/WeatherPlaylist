@@ -37,7 +37,7 @@ public class WeatherService {
 		
 		// 緯度と経度を埋め込んだURLを作成する
 		String url = String.format(
-				"https://api.open-meteo.com/v1/forecast?latitude=%.4f&longitude=%.4f&current_temperature_2m,weather_code&timezone=Asia/Tokyo",
+				"https://api.open-meteo.com/v1/forecast?latitude=%.4f&longitude=%.4f&current=temperature_2m,weather_code&timezone=Asia/Tokyo",
 				latitude,
 				longitude);
 		
