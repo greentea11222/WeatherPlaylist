@@ -1,63 +1,197 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>お天気プレイリスト</title>
-	<style>
-		/* 全体の背景と文字設定 */
-		body { font-family: Arial, sans-serif; background: #f0f4f8; text-align: center; padding: 50px; }
-		.playlist-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 400px; margin: 0 auto; }
-		.music-item { margin: 15px 0; padding: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-		.play-btn { background: #ff0000; color: white; padding: 5px 15px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; }
-		.play-btn:hover { background: #cc0000;}
-		
-		/* 天気情報エリアのスタイル */
-		.weather-header {
-			background: linear-gradient(135deg, #4299e1, #3182ce);
-			color: white;
-			padding: 20px 30px;
-			border-radius: 15px;
-			max-width: 400px;
-			margin: 0 auto 30 px auto;
-			box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-		}
-		.weather-header h1 { margin: 0 0 10px 0; font-size: 24px; }
-		.weather-info { font-size: 18px; margin: 5px 0; }
-		.temp { font-size: 32px; font-weight: bold; margin: 10px 0 0 0; }
-		
-		/* プレイリストエリアのスタイル */
-		.playlist-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px ggba(0,0,0,0.1); max-width: 400px; margin: 0 auto; }
-		.music-item { margin: 15px 0; padding: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-		.play-btn { background: #ff0000; color: white; padding: 5px 15px; text-decoration: none; font-weight: bold; font-size: 14px; }
-		.play-btn:hover { background: #cc0000; }
-	</style>
+    <meta charset="UTF-8">
+    <title>お天気プレイリスト</title>
+    <style>
+        /* 全体の背景と文字設定 */
+        body { 
+            font-family: 'Helvetica Neue', Arial, sans-serif; 
+            background: #eef2f7; 
+            margin: 0;
+            padding: 40px 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ☀️ お天気情報ヘッダーエリア */
+        .weather-header {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 24px 32px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.25);
+            text-align: center;
+            box-sizing: border-box;
+            margin-bottom: 24px;
+        }
+        .weather-header h1 { 
+            margin: 0 0 8px 0; 
+            font-size: 22px; 
+            font-weight: 600;
+        }
+        .weather-info { 
+            font-size: 16px; 
+            opacity: 0.9;
+        }
+        .temp { 
+            font-size: 38px; 
+            font-weight: bold; 
+            margin-top: 8px; 
+        }
+
+        /* 🎵 プレイリストカードエリア */
+        .playlist-card { 
+            background: white; 
+            padding: 28px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); 
+            width: 100%;
+            max-width: 420px; 
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        .playlist-card h2 {
+            margin: 0 0 16px 0;
+            font-size: 20px;
+            color: #1e293b;
+            text-align: center;
+        }
+        .divider {
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+            margin-bottom: 16px;
+        }
+
+        /* 🎼 曲ごとの表示枠 */
+        .music-item { 
+            padding: 12px 0; 
+            border-bottom: 1px solid #f1f5f9; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .music-item:last-child {
+            border-bottom: none;
+        }
+        .music-info {
+            text-align: left;
+            max-width: 240px;
+        }
+        .music-title {
+            font-weight: bold;
+            font-size: 15px;
+            color: #334155;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .music-artist {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* 🔴 再生ボタン */
+        .play-btn { 
+            background: #ef4444; 
+            color: white; 
+            padding: 8px 16px; 
+            border-radius: 20px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 13px; 
+            transition: background 0.2s ease, transform 0.1s ease;
+            white-space: nowrap;
+        }
+        .play-btn:hover { 
+            background: #dc2626; 
+            transform: scale(1.03);
+        }
+		/* 🏙️ 都市選択フォームエリア */
+		        .city-form-container {
+		            background: white;
+		            padding: 16px 24px;
+		            border-radius: 16px;
+		            width: 100%;
+		            max-width: 420px;
+		            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+		            box-sizing: border-box;
+		            margin-bottom: 20px;
+		            display: flex;
+		            align-items: center;
+		            justify-content: space-between;
+		        }
+		        .city-form-container label {
+		            font-size: 14px;
+		            font-weight: bold;
+		            color: #475569;
+		        }
+		        .city-select {
+		            padding: 8px 12px;
+		            border-radius: 8px;
+		            border: 1px solid #cbd5e1;
+		            font-size: 14px;
+		            outline: none;
+		            background: #f8fafc;
+		        }
+		        .city-btn {
+		            background: #3b82f6;
+		            color: white;
+		            border: none;
+		            padding: 8px 16px;
+		            border-radius: 8px;
+		            font-weight: bold;
+		            font-size: 14px;
+		            cursor: pointer;
+		            transition: background 0.2s ease;
+		        }
+		        .city-btn:hover {
+		            background: #2563eb;
+		        }
+    </style>
 </head>
 <body>
-	<!-- 気温・都市名を表示するヘッダーエリア -->
-	<div class="weather-header">
-		<h1 th:text="${cityName} + ' の現在の天気'">Tokyo の現在の天気</h1>
-		<div class="weather-info">
-			状態：<span th:text="${currentStatus}" style="font-weight: bold;">SUNNY</span>
-		</div>
-		<div class="temp">
-			<span th:text="${temperature}">25.0</span>
-		</div>
-	</div>
-	<!-- プレイリストエリア -->
-	<div class="playlist-card" th:each="playlist: ${playlists}">
-		<h2 th:text="${playlist.title}"プレイリスト名></h2>
-		<p>現在の気分：<span th:text="${playlist.status}" style="font-weight: bold; color: #3182ce">STATUS</span></p>
-		<hr>
-		
-		<div>
-			<div class="music-item" th:each="music : ${playlist.musicList}">
-				<div style="text-align: left;">
-					<string th:text="${music.title}">曲名</string><br>
-					<small th:text="${music.artist}" style="color: #666">アーティスト</small>
-				</div>
-				<a th:href="${music.youtubeUrl}" target="_blank" class="play-btn">再生</a>
-			</div>
-		</div>
-	</div>
+	<body>
+    <!-- 🏙️ 都市を選択するドロップダウンフォーム -->
+    <div class="city-form-container">
+        <label for="citySelect">📍 都市を選択:</label>
+        <form action="/api/recommend-view" method="get" style="display: flex; gap: 8px;">
+            <select id="citySelect" name="city" class="city-select">
+                <option value="Tokyo" th:selected="${cityName == 'Tokyo'}">東京 (Tokyo)</option>
+                <option value="Osaka" th:selected="${cityName == 'Osaka'}">大阪 (Osaka)</option>
+                <option value="Sapporo" th:selected="${cityName == 'Sapporo'}">札幌 (Sapporo)</option>
+                <option value="Okinawa" th:selected="${cityName == 'Okinawa'}">沖縄 (Okinawa)</option>
+            </select>
+            <button type="submit" class="city-btn">変更</button>
+        </form>
+    </div>
+    <!-- ☀️ 気温・都市名を表示するヘッダーエリア -->
+    <div class="weather-header">
+        <h1 th:text="${cityName} + ' の現在の天気'">Tokyo の現在の天気</h1>
+        <div class="weather-info">
+            状態: <span th:text="${currentStatus}" style="font-weight: bold;">SUNNY</span>
+        </div>
+        <div class="temp">
+            <span th:text="${temperature}">25.0</span>℃
+        </div>
+    </div>
+
+    <!-- 🎵 おすすめプレイリストエリア -->
+    <div class="playlist-card" th:each="playlist : ${playlists}">
+        <h2 th:text="${playlist.title}">プレイリスト名</h2>
+        <div class="divider"></div>
+        
+        <div class="music-item" th:each="music : ${playlist.musicList}">
+            <div class="music-info">
+                <span class="music-title" th:text="${music.title}">曲名</span>
+                <span class="music-artist" th:text="${music.artist}">アーティスト</span>
+            </div>
+            <a th:href="${music.youtubeUrl}" target="_blank" class="play-btn">再生 🎵</a>
+        </div>
+    </div>
+
 </body>
 </html>
