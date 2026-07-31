@@ -13,6 +13,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+			transition: background 0.5s ease;
+			min-height: 100vh;
         }
 		/* 晴れの日の背景テーマ */
 		body.theme-SUNNY {
@@ -172,7 +174,8 @@
     </style>
 </head>
 <body>
-	<body>
+	<!-- 天気ごとにクラスを変更-->
+	<body th:classapend="'theme-' + ${currentStatus}">
     <!-- 🏙️ 都市を選択するドロップダウンフォーム -->
     <div class="city-form-container">
         <label for="citySelect">📍 都市を選択:</label>
