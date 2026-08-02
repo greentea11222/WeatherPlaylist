@@ -60,7 +60,7 @@ public class WeatherController {
 		Music music1 = new Music();
 		music1.setTitle("Adventure");
 		music1.setArtist("はるかぜ");
-		music1.setYoutubeUrl("https://www.youtube.com/embed/5qap5aO4i9A");
+		music1.setYoutubeUrl("https://www.youtube.com/embed/S_MOd40872I");
 		
 		Music music2 = new Music();
 		music2.setTitle("Sunny Day");
@@ -83,7 +83,7 @@ public class WeatherController {
 		Music music3 = new Music();
 		music3.setTitle("Rain");
 		music3.setArtist("雨");
-		music3.setYoutubeUrl("https://www.youtube.com/embed/2gliGaeX65U");
+		music3.setYoutubeUrl("https://www.youtube.com/embed/mPZkdNFkNps");
 		
 		Music music4 = new Music();
 		music4.setTitle("雨の午後");
@@ -106,7 +106,7 @@ public class WeatherController {
 		Music music5 = new Music();
 		music5.setTitle("Misty Road");
 		music5.setArtist("Lo-Fi Chill");
-		music5.setYoutubeUrl("https://www.youtube.com/embed/jfKfPfyJRdk");
+		music5.setYoutubeUrl("https://www.youtube.com/embed/Dx5qFacd3-E");
 		
 		List<Music> foggyMusicList = new ArrayList();
 		foggyMusicList.add(music5);
@@ -121,7 +121,7 @@ public class WeatherController {
 		Music music6 = new Music();
 		music6.setTitle("White Magic");
 		music6.setArtist("しんしん");
-		music6.setYoutubeUrl("https://www.youtube.com/embed/DWcJFNfaw9c");
+		music6.setYoutubeUrl("https://www.youtube.com/embed/q76bMs-NwRk");
 		
 		List<Music> snowyMusicList = new ArrayList<>();
 		snowyMusicList.add(music6);
