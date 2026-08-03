@@ -12,6 +12,8 @@ public class Playlist {
 	//プレイリストに紐づく天気
 	private String status;
 	
+	//温度など
+	private String mood;
 	//曲のリスト
 	private List<Music> musicList;
 }

@@ -23,7 +23,7 @@ public class WeatherController {
 	private WeatherService weatherService;
 	
 	@GetMapping(value = "/recommend-view")
-	public String getRecommendView(@RequestParam("city") String cityName, org.springframework.ui.Model model){
+	public String getRecommendView(@RequestParam(value = "city", defaultValue = "Tokyo") String cityName, org.springframework.ui.Model model){
 		
 		//都市名を使って、天気サービスから全体のレスポンスを取得する
 		WeatherResponse response = weatherService.getWeather(cityName);
@@ -53,6 +53,17 @@ public class WeatherController {
 		default -> "SUNNY";
 		
 		};
+		
+		//気温から雰囲気(mood)を判定
+		String moodTag;
+		if (temperature >= 25.0) {
+			moodTag = "HOT";
+		} else if (temperature <= 10.0) {
+			moodTag = "COLD";
+		} else {
+			moodTag = "MILD";
+		}
+		
 		//全てのプレイリスト一覧を作成
 		List<Playlist> allPlaylists = new ArrayList<Playlist>();
 		
