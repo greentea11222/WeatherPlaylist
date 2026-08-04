@@ -67,28 +67,45 @@ public class WeatherController {
 		//全てのプレイリスト一覧を作成
 		List<Playlist> allPlaylists = new ArrayList<Playlist>();
 		
-		// 1曲ずつ曲のインスタンスを作る
+		// -------------------------------------------
+		// 晴れ用①：暑い日のサマーポップス
+		// -------------------------------------------
 		Music music1 = new Music();
 		music1.setTitle("Adventure");
 		music1.setArtist("はるかぜ");
 		music1.setYoutubeUrl("https://www.youtube.com/embed/S_MOd40872I");
 		
+		// 曲のリストを作成し、作った曲を詰める
+		List<Music> sunnyHotMusicList = new ArrayList<>();
+		sunnyHotMusicList.add(music1);
+		
+		// プレイリストのインスタンスを作り、タイトル・天気・曲リストをセットする
+		Playlist list1 = new Playlist();
+		list1.setTitle("真夏の爽快ポップス");
+		list1.setStatus("SUNNY");
+		list1.setMood("HOT");
+		list1.setMusicList(sunnyHotMusicList);
+		allPlaylists.add(list1);
+		
+		// -------------------------------------------
+		// 晴れ用②：快適・心地よい日のポップス
+		// -------------------------------------------
 		Music music2 = new Music();
 		music2.setTitle("Sunny Day");
 		music2.setArtist("Blue Sky");
 		music2.setYoutubeUrl("https://www.youtube.com/results?search_query=Sunny+Day+Blue+Sky");
 		
-		// 曲のリストを作成し、作った曲を詰める
-		List<Music> sunnyMusicList = new ArrayList<>();
-		sunnyMusicList.add(music1);
-		sunnyMusicList.add(music2);
+		List<Music> sunnyMildMusicList = new ArrayList<>();
+		sunnyMildMusicList.add(music2);
 		
 		// プレイリストのインスタンスを作り、タイトル・天気・曲リストをセットする
-		Playlist list1 = new Playlist();
-		list1.setTitle("晴れやか爽快ポップス");
-		list1.setStatus("SUNNY");
-		list1.setMusicList(sunnyMusicList);
-		allPlaylists.add(list1);
+		Playlist list2 = new Playlist();
+		list2.setTitle("お散歩ポップス");
+		list2.setStatus("SUNNY");
+		list2.setMood("MILD");
+		list2.setMusicList(sunnyMildMusicList);
+		allPlaylists.add(list2);
+		
 		
 		// 1曲ずつ曲のインスタンスを作る
 		Music music3 = new Music();
@@ -106,12 +123,6 @@ public class WeatherController {
 		rainyMusicList.add(music3);
 		rainyMusicList.add(music4);
 		
-		// プレイリストのインスタンスを作り、タイトル・天気・曲リストをセットする
-		Playlist list2 = new Playlist();
-		list2.setTitle("雨の日の曲");
-		list2.setStatus("RAINY");
-		list2.setMusicList(rainyMusicList);
-		allPlaylists.add(list2);
 		
 		// 霧の日用プレイリスト
 		Music music5 = new Music();
