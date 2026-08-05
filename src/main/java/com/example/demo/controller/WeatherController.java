@@ -106,53 +106,59 @@ public class WeatherController {
 		list2.setMusicList(sunnyMildMusicList);
 		allPlaylists.add(list2);
 		
-		
-		// 1曲ずつ曲のインスタンスを作る
+		// -------------------------------------------
+		// 雨用①：寒い雨のしっとり曲
+		// -------------------------------------------
 		Music music3 = new Music();
 		music3.setTitle("Rain");
 		music3.setArtist("雨");
 		music3.setYoutubeUrl("https://www.youtube.com/embed/mPZkdNFkNps");
 		
-		Music music4 = new Music();
-		music4.setTitle("雨の午後");
-		music4.setArtist("Grayyyy");
-		music4.setYoutubeUrl("https://www.youtube.com/results?search_query=雨の午後+Grayyyy");
-		
-		// 曲のリストを作成し、作った曲を詰める
-		List<Music> rainyMusicList = new ArrayList<>();
-		rainyMusicList.add(music3);
-		rainyMusicList.add(music4);
-		
-		
-		// 霧の日用プレイリスト
-		Music music5 = new Music();
-		music5.setTitle("Misty Road");
-		music5.setArtist("Lo-Fi Chill");
-		music5.setYoutubeUrl("https://www.youtube.com/embed/Dx5qFacd3-E");
-		
-		List<Music> foggyMusicList = new ArrayList();
-		foggyMusicList.add(music5);
+		List<Music> rainyColdMusicList = new ArrayList<>();
+		rainyColdMusicList.add(music3);
 		
 		Playlist list3 = new Playlist();
-		list3.setTitle("幻想的な霧のロファイ");
-		list3.setStatus("FOGGY");
-		list3.setMusicList(foggyMusicList);
+		list3.setTitle("冷たい雨の日に聴きたいジャズ");
+		list3.setStatus("RAINY");
+		list3.setMood("COLD");
+		list3.setMusicList(rainyColdMusicList);
 		allPlaylists.add(list3);
 		
-		// 雪の日用
-		Music music6 = new Music();
-		music6.setTitle("White Magic");
-		music6.setArtist("しんしん");
-		music6.setYoutubeUrl("https://www.youtube.com/embed/q76bMs-NwRk");
+		// -------------------------------------------
+		// 霧用
+		// -------------------------------------------		
+		Music music4 = new Music();
+		music4.setTitle("Misty Road");
+		music4.setArtist("Lo-Fi Chill");
+		music4.setYoutubeUrl("https://www.youtube.com/embed/Dx5qFacd3-E");
 		
-		List<Music> snowyMusicList = new ArrayList<>();
-		snowyMusicList.add(music6);
+		List<Music> foggyMusicList = new ArrayList<>();
+		foggyMusicList.add(music4);
 		
 		Playlist list4 = new Playlist();
-		list4.setTitle("しんしんと降る雪のバラード");
-		list4.setStatus("SNOWY");
-		list4.setMusicList(snowyMusicList);
+		list4.setTitle("幻想的な霧のロファイ");
+		list4.setStatus("FOGGY");
+		list4.setMood("MILD");
+		list4.setMusicList(foggyMusicList);
 		allPlaylists.add(list4);
+		
+		// -------------------------------------------
+		// 雪用
+		// -------------------------------------------		
+		Music music5 = new Music();
+		music5.setTitle("White Magic");
+		music5.setArtist("しんしん");
+		music5.setYoutubeUrl("https://www.youtube.com/embed/q76bMs-NwRk");
+		
+		List<Music> snowyMusicList = new ArrayList<>();
+		snowyMusicList.add(music5);
+		
+		Playlist list5 = new Playlist();
+		list5.setTitle("しんしんと降る雪のバラード");
+		list5.setStatus("SNOWY");
+		list5.setMood("COLD");
+		list5.setMusicList(snowyMusicList);
+		allPlaylists.add(list5);
 		
 		//全てのプレイリストから、天気が一致するものを絞り込む
 		List<Playlist> matchedPlaylists = allPlaylists.stream()
