@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -163,7 +164,15 @@ public class WeatherController {
 		//全てのプレイリストから、天気が一致するものを絞り込む
 		List<Playlist> matchedPlaylists = allPlaylists.stream()
 				.filter(playlist -> playlist.getStatus().equals(currentStatus))
+				.filter(playlist -> playlist.getMood().equals(moodTag))
 				.toList();
+		
+		//もし天気・気温に完全一致するものがない場合は、天気の一致だけで探す
+		if (matchedPlaylists.isEmpty()) {
+			matchedPlaylists = allPlaylists.stream()
+					.filter(playlist -> playlist.getStatus().equals(currentStatus))
+					.collect(Collectors.toList());
+		}
 		
 		// 画面（HTML）にデータを渡す
 		model.addAttribute("cityName", cityName);
