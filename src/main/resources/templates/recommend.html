@@ -188,6 +188,16 @@
 					height: 100%;
 					border: none;
 				}
+				/*おでかけアドバイス*/
+				.advice-box{
+					margin-top: 16px;
+					padding: 10px 16px;
+					background: rgba(255,255,255,0.2);
+					border-radius: 10px;
+					font-size: 14px;
+					line-height: 1.4;
+					backdrop-filter: blur(4px);
+				}
     </style>
 </head>
 <body>
@@ -215,6 +225,10 @@
         <div class="temp">
             <span th:text="${temperature}">25.0</span>℃
         </div>
+		<!--お出かけアドバイス表示エリア-->
+		<div class="advice-box" th:text="${adviceMessage}">
+			✨お出かけにぴったりの心地よいお天気です！素敵な1日を！
+		</div>
     </div>
 
     <!-- 🎵 おすすめプレイリストエリア -->

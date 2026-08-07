@@ -174,10 +174,25 @@ public class WeatherController {
 					.collect(Collectors.toList());
 		}
 		
+		//天気と気温に応じたおでかけアドバイスを作成
+		String adviceMessage;
+		if (currentStatus.equals("RAINY")) {
+			adviceMessage = "☔️雨が降っています。傘を持って出かけましょう！"; 
+		} else if (currentStatus.equals("SNOWY")) {
+			adviceMessage = "❄️雪が降っています。足元に気をつけて、しっかり防寒して出かけましょう。";
+		} else if (temperature >= 28.0) {
+			adviceMessage = "🥤厳しい暑さになりそうです。こまめな水分補給と熱中症対策を！";
+		} else if (temperature <= 10.0) {
+			adviceMessage = "🧥肌寒い日になりそうです。暖かい上着を持ってお出かけください。";
+		} else {
+			adviceMessage = "✨お出かけにぴったりの心地よいお天気です！素敵な1日を！";
+		}
+		
 		// 画面（HTML）にデータを渡す
 		model.addAttribute("cityName", cityName);
 		model.addAttribute("temperature", temperature);
 		model.addAttribute("currentStatus", currentStatus);
+		model.addAttribute("adviceMessage", adviceMessage);
 		model.addAttribute("playlists", matchedPlaylists);
 		
 		// templates/recommend.htmlを表示する
