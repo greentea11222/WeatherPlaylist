@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,6 +64,22 @@ public class WeatherController {
 			moodTag = "COLD";
 		} else {
 			moodTag = "MILD";
+		}
+		
+		// 現在の時刻を取得して時間帯を判定する
+		LocalTime now = LocalTime.now();
+		int hour = now.getHour();
+		
+		String timeOfDay;
+		if (hour >= 5 && hour < 11) {
+			//朝
+			timeOfDay = "MORNING";
+		} else if (hour >= 11 && hour < 18) {
+			//昼
+			timeOfDay = "DAY";
+		} else {
+			//夜
+			timeOfDay = "NIGHT";
 		}
 		
 		//全てのプレイリスト一覧を作成
