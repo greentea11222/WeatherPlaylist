@@ -201,6 +201,10 @@ public class WeatherController {
 			adviceMessage = "🥤厳しい暑さになりそうです。こまめな水分補給と熱中症対策を！";
 		} else if (temperature <= 10.0) {
 			adviceMessage = "🧥肌寒い日になりそうです。暖かい上着を持ってお出かけください。";
+		} else if (timeOfDay.equals("MORNING") && currentStatus.equals("SUNNY")) {
+			adviceMessage = "☕️爽やかな朝です！気持ちの良い一日のスタートを";
+		} else if (timeOfDay.equals("NIGHT")) {
+			adviceMessage = "🌙今夜は冷え込む可能性があります。暖かくしてお過ごしください。";
 		} else {
 			adviceMessage = "✨お出かけにぴったりの心地よいお天気です！素敵な1日を！";
 		}
