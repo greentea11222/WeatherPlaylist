@@ -213,6 +213,7 @@ public class WeatherController {
 		model.addAttribute("cityName", cityName);
 		model.addAttribute("temperature", temperature);
 		model.addAttribute("currentStatus", currentStatus);
+		model.addAttribute("timeOfDay", timeOfDay);
 		model.addAttribute("adviceMessage", adviceMessage);
 		model.addAttribute("playlists", matchedPlaylists);
 		
