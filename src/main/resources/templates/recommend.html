@@ -205,6 +205,11 @@
 					line-height: 1;
 					animation: bounce 2s infinite ease-in-out;
 				}
+				
+				@keyframes bounce{
+					0%, 100% { transform: translateY(0); }
+					50% { transform: translateY(-6px); }
+				}
     </style>
 </head>
 <body>
@@ -225,6 +230,16 @@
     </div>
     <!-- ☀️ 気温・都市名を表示するヘッダーエリア -->
     <div class="weather-header">
+		<!-- 天気ステータスに応じてアイコンを切り替える-->
+		<div class="weather-icon" th:switch="${currentStatus}">
+			<span th:case="'SUNNY'">☀️</span>
+			<span th:case="'RAINY'">☔️️</span>
+			<span th:case="'FOGGY'">☀☁️</span>
+			<span th:case="'SNOWY'">☀❄️</span>
+			<span th:case="*">☀🌤️</span>
+		</div>
+		
+		
         <h1 th:text="${cityName} + ' の現在の天気'">Tokyo の現在の天気</h1>
         <div class="weather-info">
             状態: <span th:text="${currentStatus}" style="font-weight: bold;">SUNNY</span>
