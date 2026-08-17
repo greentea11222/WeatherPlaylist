@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -207,6 +208,19 @@ public class WeatherController {
 			adviceMessage = "🌙今夜は冷え込む可能性があります。暖かくしてお過ごしください。";
 		} else {
 			adviceMessage = "✨お出かけにぴったりの心地よいお天気です！素敵な1日を！";
+		}
+		
+		// 抽出されたプレイリストや曲をランダムにシャッフルする
+		if (!matchedPlaylists.isEmpty()) {
+			// プレイリスト自体をランダムに並び替え
+			Collections.shuffle(matchedPlaylists);
+			
+			// 各プレイリストの中身の曲もランダムに並び替え
+			for (Playlist p : matchedPlaylists) {
+				if (p.getMusicList() != null) {
+					Collections.shuffle(p.getMusicList());
+				}
+			}
 		}
 		
 		// 画面（HTML）にデータを渡す
