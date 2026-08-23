@@ -239,17 +239,14 @@
 <body>
 	<!-- 天気ごとにクラスを変更-->
 	<body th:classapend="'theme-' + ${currentStatus}">
-    <!-- 🏙️ 都市を選択するドロップダウンフォーム -->
+    <!-- 🏙️ 都市名検索フォーム -->
     <div class="city-form-container">
-        <label for="citySelect">📍 都市を選択:</label>
+        <label for="cityInput">📍 都市名で検索:</label>
         <form action="/api/recommend-view" method="get" style="display: flex; gap: 8px;">
-            <select id="citySelect" name="city" class="city-select">
-                <option value="Tokyo" th:selected="${cityName == 'Tokyo'}">東京 (Tokyo)</option>
-                <option value="Osaka" th:selected="${cityName == 'Osaka'}">大阪 (Osaka)</option>
-                <option value="Sapporo" th:selected="${cityName == 'Sapporo'}">札幌 (Sapporo)</option>
-                <option value="Okinawa" th:selected="${cityName == 'Okinawa'}">沖縄 (Okinawa)</option>
-            </select>
-            <button type="submit" class="city-btn">変更</button>
+            <input
+				type="text"
+			/>
+            <button type="submit" class="city-btn">検索</button>
         </form>
     </div>
     <!-- ☀️ 気温・都市名を表示するヘッダーエリア -->
