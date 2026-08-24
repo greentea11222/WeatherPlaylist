@@ -243,8 +243,16 @@
     <div class="city-form-container">
         <label for="cityInput">📍 都市名で検索:</label>
         <form action="/api/recommend-view" method="get" style="display: flex; gap: 8px;">
-            <input
+            <!--入力欄。requred=必須-->
+			<input
 				type="text"
+				id="cityInput"
+				name="city"
+				class="city-select"
+				th:value="${cityName}"
+				placeHolder="例：Kyoto, London, Fukuoka"
+				required
+				style="width: 180px"
 			/>
             <button type="submit" class="city-btn">検索</button>
         </form>
@@ -276,7 +284,7 @@
 	<!--シャッフルボタン-->
 	<div class="shuffle-btn-container">
 		<form action="/api/recommend-view" method="get" style="display: inline;">
-			<input type="hidden" name="city" th:value="&{cityName}" />
+			<input type="hidden" name="city" th:value="${cityName}" />
 			<button type="submit" class="shuffle-btn">
 				🎲別の曲をリコメンド！
 			</button>
