@@ -26,10 +26,21 @@ public class WeatherController {
 	private WeatherService weatherService;
 	
 	@GetMapping(value = "/recommend-view")
-	public String getRecommendView(@RequestParam(value = "city", defaultValue = "Tokyo") String cityName, org.springframework.ui.Model model){
+	public String getRecommendView(
+			@RequestParam(value = "city", required = false, defaultValue = "Tokyo") String cityName, 
+			@RequestParam(value = "lat", required = false) Double lat,
+			@RequestParam(value = "lon", required = false) Double lon,
+			org.springframework.ui.Model model){
 		
-		//都市名を使って、天気サービスから全体のレスポンスを取得する
-		WeatherResponse response = weatherService.getWeather(cityName);
+		WeatherResponse response;
+		
+		// 緯度・経度が直接送られてきた場合はそれを使用し、それ以外の場合は都市名から取得
+		if(lat != null && lon != null) {
+			response = weatherService.getWeatherByCoordinates(lat, lon);
+			cityName = "現在地";
+		} else {
+			response = weatherService.getWeather(cityName);
+		}
 		
 		//天気コード（数字）を取得
 		int weatherCode = response.getCurrent().getWeatherCode();

@@ -40,8 +40,12 @@ public class WeatherService {
 				"https://api.open-meteo.com/v1/forecast?latitude=%.4f&longitude=%.4f&current=temperature_2m,weather_code&timezone=Asia/Tokyo",
 				lat,
 				lon);
+		return getWeatherByCoordinates(lat, lon);
+	}
+	
+	public WeatherResponse getWeatherByCoordinates(double lat, double lon) {
 		
-		// APIを呼び出して結果を返す
+		String url = String.format("", lat, lon);
 		return restTemplate.getForObject(url, WeatherResponse.class);
 	}
 }
