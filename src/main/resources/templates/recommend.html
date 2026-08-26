@@ -256,6 +256,12 @@
 			/>
             <button type="submit" class="city-btn">検索</button>
         </form>
+		<!--位置情報取得ボタン-->
+		<button type="button" onclick="getLocation()" class="city-btn" style="background: #10b981;">
+			📍現在地
+		</button>
+		
+		
     </div>
     <!-- ☀️ 気温・都市名を表示するヘッダーエリア -->
     <div class="weather-header">
@@ -310,6 +316,21 @@
 			</div>
         </div>
     </div>
-
+	<script>
+		function getLocation(){
+			if (navigator.geolocation){
+				// ブラウザに位置情報の取得を要求
+				navigator.geolocation.getCurrentPosition(
+					(position) => {
+						const lat = position.coords.latitude;
+						const lon = position.coords.longitude;
+						//取得した緯度・経度をパラメータにつけてページをリロード
+						window.location.href = ``;
+					}
+				)
+			}
+		}
+	</script>
+	
 </body>
 </html>
