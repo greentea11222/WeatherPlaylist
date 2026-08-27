@@ -325,9 +325,14 @@
 						const lat = position.coords.latitude;
 						const lon = position.coords.longitude;
 						//取得した緯度・経度をパラメータにつけてページをリロード
-						window.location.href = ``;
+						window.location.href = `/api/recommend-view?lat=${lat}&lon=${lon}`;
+					},
+					(error) => {
+						alert("位置情報の取得に失敗しました。ブラウザの許可設定をご確認ください。");
 					}
-				)
+				);
+			} else {
+				alert("お使いのブラウザは位置情報に対応していません。");
 			}
 		}
 	</script>
