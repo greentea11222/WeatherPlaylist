@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.Locale;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -44,6 +46,7 @@ public class WeatherService {
 		
 		// 緯度と経度を埋め込んだURLを作成する
 				String url = String.format(
+						Locale.US,
 						"https://api.open-meteo.com/v1/forecast?latitude=%.4f&longitude=%.4f&current_weather=true",
 						lat,
 						lon);

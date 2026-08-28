@@ -8,6 +8,6 @@ import lombok.Data;
 public class WeatherResponse {
 	private String cityName;
 	
-	@JsonProperty("current")
+	@JsonProperty("current_weather")
 	private CurrentWeather current;
 }
