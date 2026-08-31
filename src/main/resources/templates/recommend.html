@@ -345,6 +345,25 @@
 		renderHistory();	
 	});
 	
+	// 表示中の都市名をlocalStrageに保存する関数
+	function saveCityToHistory(){
+		//ThymeLeafから現在の都市名を取得
+		const currentCity = "[[${cityName}]]";
+		//現在地の場合や空の場合は保存しない
+		if(!currentCity || currentCity === "現在地") return;
+		
+		let history = JSON.parse(localStrage.getItem("weather_city_history")) || [];
+		
+		//重複を削除して先頭に追加
+		history = history.filter(city => city.toLowerCase() !== currentCity.toLowerCase());
+		history.unshift(currentCity);
+		
+		//最大5件まで保存
+		if(history.length > 5){}
+		history.pop();
+		
+		localStrage.setItem("weather_city_history", JSON.stringify(history));
+	}
 		function getLocation(){
 			if (navigator.geolocation){
 				// ブラウザに位置情報の取得を要求
