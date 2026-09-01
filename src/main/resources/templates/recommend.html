@@ -364,25 +364,50 @@
 		
 		localStrage.setItem("weather_city_history", JSON.stringify(history));
 	}
-		function getLocation(){
-			if (navigator.geolocation){
-				// ブラウザに位置情報の取得を要求
-				navigator.geolocation.getCurrentPosition(
-					(position) => {
-						const lat = position.coords.latitude;
-						const lon = position.coords.longitude;
-						//取得した緯度・経度をパラメータにつけてページをリロード
-						window.location.href = `/api/recommend-view?lat=${lat}&lon=${lon}`;
-					},
-					(error) => {
-						alert("位置情報の取得に失敗しました。ブラウザの許可設定をご確認ください。");
-					}
-				);
-			} else {
-				alert("お使いのブラウザは位置情報に対応していません。");
-			}
-		}
+	
+	//保存されている履歴をボタンとして画面に表示する
+	function renderHistory(){
+		const history = JSON.parse(localStrage.getItem("weather_city_history")) || [];
+		const container = document.getElementById("historyButtons");
 		
+		if(!container) return;
+		container.innerHTML = "";
+		
+		if(history.length === 0){
+			document.getElementById("historyContainer").style.display = "none";
+			return;
+		}
+		history.forEach(city =>{
+			const btn = document.createElement("button");
+			btn.type = "button";
+			btn.className = "history-btn";
+			btn.textContent = city;
+			//ボタンを押したらその都市の天気を検索
+			btn.onclick = () => {
+				window.loaction.href = `/api/recommend-view?city=${encodeURIComponent(city)}`;
+			};
+			container.appendChild(btn);
+		});
+	}
+	
+	function getLocation(){
+		if (navigator.geolocation){
+			// ブラウザに位置情報の取得を要求
+			navigator.geolocation.getCurrentPosition(
+				(position) => {
+					const lat = position.coords.latitude;
+					const lon = position.coords.longitude;
+					//取得した緯度・経度をパラメータにつけてページをリロード
+					window.location.href = `/api/recommend-view?lat=${lat}&lon=${lon}`;
+				},
+				(error) => {
+					alert("位置情報の取得に失敗しました。ブラウザの許可設定をご確認ください。");
+				}
+			);
+		} else {
+			alert("お使いのブラウザは位置情報に対応していません。");
+		}
+	}
 	</script>
 	
 </body>
