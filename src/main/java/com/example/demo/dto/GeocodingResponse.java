@@ -13,7 +13,7 @@ public class GeocodingResponse {
 	private List<CityResult> results;
 	
 	@Data
-	private static class CityResult{
+	public static class CityResult{
 		private String name;
 		private double latitude;
 		private double longitude;

@@ -21,20 +21,33 @@ public class WeatherService {
 		//Open-Meteo Geocoding APIのURL
 		String geoUrl = String.format("https://geocoding-api.open-meteo.com/v1/search?name=%s&count=1&language=en&format=json", query);
 		
-		
-		
 		try {
 			GeocodingResponse geoResponse = restTemplate.getForObject(geoUrl, GeocodingResponse.class);
+		
+			//検索結果が存在する場合
+			if(geoResponse != null && geoResponse.getResults() != null && !geoResponse.getResults().isEmpty()) {
+				GeocodingResponse.CityResult city = geoResponse.getResults().get(0);
+				
+				//正確な緯度・経度で天気を取得
+				WeatherResponse weather = getWeatherByCoordinates(city.getLatitude(), city.getLongitude());
+				
+				//APIから返ってきた正確な都市名（例："Kyoto","Paris"など)をセット
+				if(weather != null) {
+					weather.setCityName(city.getName());
+				}
+				return weather;
+			}
+		
 		} catch (Exception e) {
 			System.out.println("Geocoding API呼び出しエラー" + e.getMessage());
 		}
 		
-		// 都市名(cityName)に応じて、緯度(lat)と経度(lon)を切り替える
-		// 大文字、小文字の違いを無視するために、toLowerCase()を使用する
-		double lat = 1;
-		double lon = 1;
-	
-		return getWeatherByCoordinates(lat, lon);
+		//検索で見つからなかった場合やエラー時はデフォルト（東京：35.6895, 139.6917)へフォールバック
+		WeatherResponse fallback = getWeatherByCoordinates(35.6895, 139.6917);
+		if(fallback != null) {
+			fallback.setCityName((query + "(見つからず東京を表示"));
+		}
+		return fallback;
 	}
 	
 	// 緯度と経度を使用してOpen-Meteo APIを呼び出す
