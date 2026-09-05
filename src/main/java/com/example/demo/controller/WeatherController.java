@@ -40,6 +40,10 @@ public class WeatherController {
 			cityName = "現在地";
 		} else {
 			response = weatherService.getWeather(cityName);
+			//APIから正式な都市名が返っていればそれを画面表示用に更新
+			if(response != null && response.getCityName() != null) {
+				cityName = response.getCityName();
+			}
 		}
 		
 		//天気コード（数字）を取得
