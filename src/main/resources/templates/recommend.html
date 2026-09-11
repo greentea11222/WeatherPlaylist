@@ -291,162 +291,163 @@
 				}
     </style>
 </head>
-<body>
-	<!-- 天気ごとにクラスを変更-->
-	<body th:classapend="'theme-' + ${currentStatus}">
-    <!-- 🏙️ 都市名検索フォーム -->
-    <div class="city-form-container">
-        <label for="cityInput">📍 都市名で検索:</label>
-        <form action="/api/recommend-view" method="get" style="display: flex; gap: 8px;">
-            <!--入力欄。requred=必須-->
-			<input
-				type="text"
-				id="cityInput"
-				name="city"
-				class="city-select"
-				th:value="${cityName}"
-				placeHolder="例：Kyoto, London, Fukuoka"
-				required
-				style="width: 180px"
-			/>
-            <button type="submit" class="city-btn">検索</button>
-        </form>
-		<!--位置情報取得ボタン-->
-		<button type="button" onclick="getLocation()" class="city-btn" style="background: #10b981;">
-			📍現在地
-		</button>
-		<!--検索履歴ボタンの表示エリア-->
-		<div id="historyContainer" style="margin-top: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-			<span style="font-size: 13px; color: #64748b">最近検索した都市</span>
-			<div id="historyButtons" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
-		</div>
-		
-		
-    </div>
-    <!-- ☀️ 気温・都市名を表示するヘッダーエリア -->
-    <div class="weather-header">
-		<!-- 天気ステータスに応じてアイコンを切り替える-->
-		<div class="weather-icon" th:switch="${currentStatus}">
-			<span th:case="'SUNNY'">☀️</span>
-			<span th:case="'RAINY'">☔️️</span>
-			<span th:case="'FOGGY'">☀☁️</span>
-			<span th:case="'SNOWY'">☀❄️</span>
-			<span th:case="*">☀🌤️</span>
-		</div>
-		
-		
-        <h1 th:text="${cityName} + ' の現在の天気'">Tokyo の現在の天気</h1>
-        <div class="weather-info">
-            状態: <span th:text="${currentStatus}" style="font-weight: bold;">SUNNY</span>
-        </div>
-        <div class="temp">
-            <span th:text="${temperature}">25.0</span>℃
-        </div>
-		<!--お出かけアドバイス表示エリア-->
-		<div class="advice-box" th:text="${adviceMessage}">
-			✨お出かけにぴったりの心地よいお天気です！素敵な1日を！
-		</div>
-    </div>
-	<!--シャッフルボタン-->
-	<div class="shuffle-btn-container">
-		<form action="/api/recommend-view" method="get" style="display: inline;">
-			<input type="hidden" name="city" th:value="${cityName}" />
-			<button type="submit" class="shuffle-btn">
-				🎲別の曲をリコメンド！
-			</button>
-		</form>
+<!-- 天気ごとにクラスを変更-->
+<body th:classapend="${timeDay == 'NIGHT'} ? 'theme-night :
+					(${currentStatus == 'RAINY'} ? 'theme-rainy' :
+					(${currentStatus == 'SNOWY'} ? 'theme-snowy : 'theme-sunny-day'))">
+<!-- 🏙️ 都市名検索フォーム -->
+<div class="city-form-container">
+    <label for="cityInput">📍 都市名で検索:</label>
+    <form action="/api/recommend-view" method="get" style="display: flex; gap: 8px;">
+        <!--入力欄。requred=必須-->
+		<input
+			type="text"
+			id="cityInput"
+			name="city"
+			class="city-select"
+			th:value="${cityName}"
+			placeHolder="例：Kyoto, London, Fukuoka"
+			required
+			style="width: 180px"
+		/>
+        <button type="submit" class="city-btn">検索</button>
+    </form>
+	<!--位置情報取得ボタン-->
+	<button type="button" onclick="getLocation()" class="city-btn" style="background: #10b981;">
+		📍現在地
+	</button>
+	<!--検索履歴ボタンの表示エリア-->
+	<div id="historyContainer" style="margin-top: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+		<span style="font-size: 13px; color: #64748b">最近検索した都市</span>
+		<div id="historyButtons" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
 	</div>
-    <!-- 🎵 おすすめプレイリストエリア -->
-    <div class="playlist-card" th:each="playlist : ${playlists}">
-        <h2 th:text="${playlist.title}">プレイリスト名</h2>
-        <div class="divider"></div>
-        
-        <div class="music-item" th:each="music : ${playlist.musicList}">
-            <div class="music-info">
-                <span class="music-title" th:text="${music.title}">曲名</span>
-                <span class="music-artist" th:text="${music.artist}">アーティスト</span>
-            </div>
-			<div class="video-container">
-				<iframe
-					th:src="${music.youtubeUrl}"
-					title="YouTube video player"
-					allow="accelerometer; autoplay; clipboard-white; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen>
-			</iframe>
-			</div>
-        </div>
+	
+	
+</div>
+<!-- ☀️ 気温・都市名を表示するヘッダーエリア -->
+<div class="weather-header">
+	<!-- 天気ステータスに応じてアイコンを切り替える-->
+	<div class="weather-icon" th:switch="${currentStatus}">
+		<span th:case="'SUNNY'">☀️</span>
+		<span th:case="'RAINY'">☔️️</span>
+		<span th:case="'FOGGY'">☀☁️</span>
+		<span th:case="'SNOWY'">☀❄️</span>
+		<span th:case="*">☀🌤️</span>
+	</div>
+	
+	
+    <h1 th:text="${cityName} + ' の現在の天気'">Tokyo の現在の天気</h1>
+    <div class="weather-info">
+        状態: <span th:text="${currentStatus}" style="font-weight: bold;">SUNNY</span>
     </div>
-	<script>
-	//画面読み込み時に履歴を更新・表示
-	document.addEventListener("DOMContentLoaded", ()=>{
-		saveCityToHistory();
-		renderHistory();	
+    <div class="temp">
+        <span th:text="${temperature}">25.0</span>℃
+    </div>
+	<!--お出かけアドバイス表示エリア-->
+	<div class="advice-box" th:text="${adviceMessage}">
+		✨お出かけにぴったりの心地よいお天気です！素敵な1日を！
+	</div>
+</div>
+<!--シャッフルボタン-->
+<div class="shuffle-btn-container">
+	<form action="/api/recommend-view" method="get" style="display: inline;">
+		<input type="hidden" name="city" th:value="${cityName}" />
+		<button type="submit" class="shuffle-btn">
+			🎲別の曲をリコメンド！
+		</button>
+	</form>
+</div>
+<!-- 🎵 おすすめプレイリストエリア -->
+<div class="playlist-card" th:each="playlist : ${playlists}">
+    <h2 th:text="${playlist.title}">プレイリスト名</h2>
+    <div class="divider"></div>
+    
+    <div class="music-item" th:each="music : ${playlist.musicList}">
+        <div class="music-info">
+            <span class="music-title" th:text="${music.title}">曲名</span>
+            <span class="music-artist" th:text="${music.artist}">アーティスト</span>
+        </div>
+		<div class="video-container">
+			<iframe
+				th:src="${music.youtubeUrl}"
+				title="YouTube video player"
+				allow="accelerometer; autoplay; clipboard-white; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen>
+		</iframe>
+		</div>
+    </div>
+</div>
+<script>
+//画面読み込み時に履歴を更新・表示
+document.addEventListener("DOMContentLoaded", ()=>{
+	saveCityToHistory();
+	renderHistory();	
+});
+
+// 表示中の都市名をlocalStrageに保存する関数
+function saveCityToHistory(){
+	//ThymeLeafから現在の都市名を取得
+	const currentCity = "[[${cityName}]]";
+	//現在地の場合や空の場合は保存しない
+	if(!currentCity || currentCity === "現在地") return;
+	
+	let history = JSON.parse(localStrage.getItem("weather_city_history")) || [];
+	
+	//重複を削除して先頭に追加
+	history = history.filter(city => city.toLowerCase() !== currentCity.toLowerCase());
+	history.unshift(currentCity);
+	
+	//最大5件まで保存
+	if(history.length > 5){}
+	history.pop();
+	
+	localStrage.setItem("weather_city_history", JSON.stringify(history));
+}
+
+//保存されている履歴をボタンとして画面に表示する
+function renderHistory(){
+	const history = JSON.parse(localStrage.getItem("weather_city_history")) || [];
+	const container = document.getElementById("historyButtons");
+	
+	if(!container) return;
+	container.innerHTML = "";
+	
+	if(history.length === 0){
+		document.getElementById("historyContainer").style.display = "none";
+		return;
+	}
+	history.forEach(city =>{
+		const btn = document.createElement("button");
+		btn.type = "button";
+		btn.className = "history-btn";
+		btn.textContent = city;
+		//ボタンを押したらその都市の天気を検索
+		btn.onclick = () => {
+			window.loaction.href = `/api/recommend-view?city=${encodeURIComponent(city)}`;
+		};
+		container.appendChild(btn);
 	});
-	
-	// 表示中の都市名をlocalStrageに保存する関数
-	function saveCityToHistory(){
-		//ThymeLeafから現在の都市名を取得
-		const currentCity = "[[${cityName}]]";
-		//現在地の場合や空の場合は保存しない
-		if(!currentCity || currentCity === "現在地") return;
-		
-		let history = JSON.parse(localStrage.getItem("weather_city_history")) || [];
-		
-		//重複を削除して先頭に追加
-		history = history.filter(city => city.toLowerCase() !== currentCity.toLowerCase());
-		history.unshift(currentCity);
-		
-		//最大5件まで保存
-		if(history.length > 5){}
-		history.pop();
-		
-		localStrage.setItem("weather_city_history", JSON.stringify(history));
+}
+
+function getLocation(){
+	if (navigator.geolocation){
+		// ブラウザに位置情報の取得を要求
+		navigator.geolocation.getCurrentPosition(
+			(position) => {
+				const lat = position.coords.latitude;
+				const lon = position.coords.longitude;
+				//取得した緯度・経度をパラメータにつけてページをリロード
+				window.location.href = `/api/recommend-view?lat=${lat}&lon=${lon}`;
+			},
+			(error) => {
+				alert("位置情報の取得に失敗しました。ブラウザの許可設定をご確認ください。");
+			}
+		);
+	} else {
+		alert("お使いのブラウザは位置情報に対応していません。");
 	}
-	
-	//保存されている履歴をボタンとして画面に表示する
-	function renderHistory(){
-		const history = JSON.parse(localStrage.getItem("weather_city_history")) || [];
-		const container = document.getElementById("historyButtons");
-		
-		if(!container) return;
-		container.innerHTML = "";
-		
-		if(history.length === 0){
-			document.getElementById("historyContainer").style.display = "none";
-			return;
-		}
-		history.forEach(city =>{
-			const btn = document.createElement("button");
-			btn.type = "button";
-			btn.className = "history-btn";
-			btn.textContent = city;
-			//ボタンを押したらその都市の天気を検索
-			btn.onclick = () => {
-				window.loaction.href = `/api/recommend-view?city=${encodeURIComponent(city)}`;
-			};
-			container.appendChild(btn);
-		});
-	}
-	
-	function getLocation(){
-		if (navigator.geolocation){
-			// ブラウザに位置情報の取得を要求
-			navigator.geolocation.getCurrentPosition(
-				(position) => {
-					const lat = position.coords.latitude;
-					const lon = position.coords.longitude;
-					//取得した緯度・経度をパラメータにつけてページをリロード
-					window.location.href = `/api/recommend-view?lat=${lat}&lon=${lon}`;
-				},
-				(error) => {
-					alert("位置情報の取得に失敗しました。ブラウザの許可設定をご確認ください。");
-				}
-			);
-		} else {
-			alert("お使いのブラウザは位置情報に対応していません。");
-		}
-	}
-	</script>
-	
+}
+</script>
+
 </body>
 </html>
