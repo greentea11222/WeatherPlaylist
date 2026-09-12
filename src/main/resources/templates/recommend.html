@@ -358,7 +358,17 @@
 	</form>
 </div>
 <!-- 🎵 おすすめプレイリストエリア -->
-<div class="playlist-card" th:each="playlist : ${playlists}">
+<div class="playlist-card" th:each="playlist : ${playlists}" class="playlist-card" style="position: relative;">
+	
+	<!--お気に入りボタン-->
+	<button type="button"
+			class="favorite-btn"
+			th:data-genre="${playlist.genre}"
+			onclick="toggleFavorite(this)"
+			style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 18px; cursor: pointer;">
+		❤
+		</button>
+	
     <h2 th:text="${playlist.title}">プレイリスト名</h2>
     <div class="divider"></div>
     
