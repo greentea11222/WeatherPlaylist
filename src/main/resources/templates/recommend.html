@@ -368,7 +368,10 @@
 			style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 18px; cursor: pointer;">
 		❤
 		</button>
-	
+		
+		<h3 th:text="${playlist.title}">プレイリストタイトル</h3>
+		<p th:text="&{playlist.genre}">ジャンル</p>	
+
     <h2 th:text="${playlist.title}">プレイリスト名</h2>
     <div class="divider"></div>
     
@@ -386,6 +389,10 @@
 		</iframe>
 		</div>
     </div>
+</div>
+<!--お気に入り一覧エリア-->
+<div　id="favoriteContainer" style="margin-top: 32px; padding:20px; background: rgba(255,255,255,0.8); border-radius: 16px;">
+	
 </div>
 <script>
 //画面読み込み時に履歴を更新・表示
