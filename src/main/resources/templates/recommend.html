@@ -481,6 +481,15 @@ document.addEventListener("DOMContentLoaded", () => {
 function getFavorites(){
 	return JSON.perse(localStorage.getItem("music_favorites")) || [];
 }
+
+//お気に入りの追加・削除切り替え
+function toggleFavorite(btn){
+	const title = btn.getAttribute("data-title");
+	const genre = btn.getAttribute("data-genre");
+	
+	let favorites = getFavorites();
+	const index = favorites.findIndex(fav => fav.title === title);
+}
 </script>
 
 </body>
