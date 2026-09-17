@@ -489,6 +489,19 @@ function toggleFavorite(btn){
 	
 	let favorites = getFavorites();
 	const index = favorites.findIndex(fav => fav.title === title);
+	
+	if (index > -1){
+		//すでに保存されていれば削除
+		favorites.splite(index, 1);
+	} else {
+		//保存されていなければ追加
+		favorites.push({title, genre});
+	}
+	localStorage.setItem("music_favorites", JSON.stringify(favorites));
+	
+	//UIを更新
+	updateHeartIcons();
+	renderFavorites();
 }
 </script>
 
