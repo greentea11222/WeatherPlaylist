@@ -503,6 +503,19 @@ function toggleFavorite(btn){
 	updateHeartIcons();
 	renderFavorites();
 }
+
+//カード上のハートアイコンの表示を更新
+function updateHeartIcons(){
+	const favorites = getFavorites();
+	const buttons = document.querySelectorAll(".favorite-btn");
+	
+	buttons.forEach(btn => {
+		const title = btn.getAttribute("data-title");
+		const isFav = favorites.some(fav => fav.title === title);
+		btn.txtContent = isFav ? "❤️" : "🤍";
+		});
+	
+}
 </script>
 
 </body>
