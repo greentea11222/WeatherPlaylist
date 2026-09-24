@@ -514,7 +514,21 @@ function updateHeartIcons(){
 		const isFav = favorites.some(fav => fav.title === title);
 		btn.txtContent = isFav ? "❤️" : "🤍";
 		});
+}
+
+//お気に入り一覧エリアをレンダリング
+function renderFavorites(){
+	const favorites = getFavorites();
+	const container = document.getElementById("favoritesList");
+	const section = document.getElementById("favoritesContainer");
 	
+	if (!container) return;
+	container.innerHTML = "";
+	
+	if (favorites.length === 0){
+		container.innerHTML = `<p style="font-size: 13px; color: #64748b;">保存されたお気に入りはありません。<p>`;
+		return;
+	}
 }
 </script>
 
