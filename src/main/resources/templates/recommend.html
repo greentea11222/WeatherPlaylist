@@ -529,6 +529,12 @@ function renderFavorites(){
 		container.innerHTML = `<p style="font-size: 13px; color: #64748b;">保存されたお気に入りはありません。<p>`;
 		return;
 	}
+	favorites.forEach(fav => {
+		const card = document.createElement("div");
+		card.style.cssText = "background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e2e8f0; font-size: 13px; display: flex; align-items: center; gap: 10px;";
+		card.innerHTML = ``;
+		container.appendChild(card);
+	});
 }
 </script>
 
