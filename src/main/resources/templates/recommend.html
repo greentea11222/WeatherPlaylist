@@ -532,7 +532,13 @@ function renderFavorites(){
 	favorites.forEach(fav => {
 		const card = document.createElement("div");
 		card.style.cssText = "background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e2e8f0; font-size: 13px; display: flex; align-items: center; gap: 10px;";
-		card.innerHTML = ``;
+		card.innerHTML = `
+			<div>
+				<strong style="display; black; color: #0f172a;">${fav.title}</strong>
+				<span style="color: #64748b; font-size: 11px;">${fav.genre}</span>
+			</div>
+			<button type="button" onclick="removeFavorite('${fav.title}')" style="background: none; cursor: pointer; color: #94a3b8; font-size: 14px;">×</button>
+		`;
 		container.appendChild(card);
 	});
 }
