@@ -542,6 +542,13 @@ function renderFavorites(){
 		container.appendChild(card);
 	});
 }
+//一覧側からの削除処理
+function removeFavorite(title){
+	let favorites = getFavorites().filter(fav => fav.title !== title);
+	localStorage.setItem("music_favorites", JSON.stringify(favorites));
+	updateHeartIcons();
+	renderFavorites();
+}
 </script>
 
 </body>
