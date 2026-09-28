@@ -30,6 +30,7 @@ public class WeatherController {
 			@RequestParam(value = "city", required = false, defaultValue = "Tokyo") String cityName, 
 			@RequestParam(value = "lat", required = false) Double lat,
 			@RequestParam(value = "lon", required = false) Double lon,
+			@RequestParam(value = "mood", required = false, defaultValue = "ALL") String mood,
 			org.springframework.ui.Model model){
 		
 		WeatherResponse response;
@@ -44,6 +45,15 @@ public class WeatherController {
 			if(response != null && response.getCityName() != null) {
 				cityName = response.getCityName();
 			}
+		}
+		//Nullチェック
+		if (response == null || response.getCurrent() == null) {
+			model.addAttribute("cityName", cityName);
+			model.addAttribute("temperature", cityName);
+			model.addAttribute("currentStatus", "SUNNY");
+			model.addAttribute("advoceMessage", "天気データの取得に失敗しました。");
+			model.addAttribute("playlists", java.util.Collections.emptyList());
+			return "recommend";
 		}
 		
 		//天気コード（数字）を取得
