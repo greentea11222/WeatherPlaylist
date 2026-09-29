@@ -27,7 +27,7 @@ public class WeatherController {
 	
 	@GetMapping(value = "/recommend-view")
 	public String getRecommendView(
-			@RequestParam(value = "city", required = false, defaultValue = "Tokyo") String cityName, 
+			@RequestParam(value = "city", required = false, defaultValue = "Tokyo") String cityName,
 			@RequestParam(value = "lat", required = false) Double lat,
 			@RequestParam(value = "lon", required = false) Double lon,
 			@RequestParam(value = "mood", required = false, defaultValue = "ALL") String mood,
@@ -49,9 +49,9 @@ public class WeatherController {
 		//Nullチェック
 		if (response == null || response.getCurrent() == null) {
 			model.addAttribute("cityName", cityName);
-			model.addAttribute("temperature", cityName);
+			model.addAttribute("temperature", "--");
 			model.addAttribute("currentStatus", "SUNNY");
-			model.addAttribute("advoceMessage", "天気データの取得に失敗しました。");
+			model.addAttribute("adviceMessage", "天気データの取得に失敗しました。");
 			model.addAttribute("playlists", java.util.Collections.emptyList());
 			return "recommend";
 		}
@@ -220,7 +220,7 @@ public class WeatherController {
 		//天気と気温に応じたおでかけアドバイスを作成
 		String adviceMessage;
 		if (currentStatus.equals("RAINY")) {
-			adviceMessage = "☔️雨が降っています。傘を持って出かけましょう！"; 
+			adviceMessage = "☔️雨が降っています。傘を持って出かけましょう！";
 		} else if (currentStatus.equals("SNOWY")) {
 			adviceMessage = "❄️雪が降っています。足元に気をつけて、しっかり防寒して出かけましょう。";
 		} else if (temperature >= 28.0) {
