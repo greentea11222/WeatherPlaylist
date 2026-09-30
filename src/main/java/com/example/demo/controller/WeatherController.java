@@ -64,22 +64,16 @@ public class WeatherController {
 		
 		//コードから天気を判定
 		String currentStatus = switch (weatherCode) {
-		
-		// 晴れ
-		case 0, 1, 2, 3 -> "SUNNY";
-		
-		// 霧
-		case 45, 48 -> "FOGGY";
-		
-		// 雨
-		case 51, 53, 55, 61, 63, 65, 80, 81, 82 -> "RAINY";
-		
-		// 雪
-		case 71, 73, 75, 85, 86 -> "SNOWY";
-		
-		// その他
-		default -> "SUNNY";
-		
+			// 晴れ
+			case 0, 1, 2, 3 -> "SUNNY";
+			// 霧
+			case 45, 48 -> "FOGGY";
+			// 雨
+			case 51, 53, 55, 61, 63, 65, 80, 81, 82 -> "RAINY";
+			// 雪
+			case 71, 73, 75, 85, 86 -> "SNOWY";
+			// その他
+			default -> "SUNNY";
 		};
 		
 		//気温から雰囲気(mood)を判定
@@ -98,14 +92,11 @@ public class WeatherController {
 		
 		String timeOfDay;
 		if (hour >= 5 && hour < 11) {
-			//朝
-			timeOfDay = "MORNING";
+			timeOfDay = "MORNING"; //朝
 		} else if (hour >= 11 && hour < 18) {
-			//昼
-			timeOfDay = "DAY";
+			timeOfDay = "DAY";	//昼
 		} else {
-			//夜
-			timeOfDay = "NIGHT";
+			timeOfDay = "NIGHT"; //夜
 		}
 		
 		//全てのプレイリスト一覧を作成
