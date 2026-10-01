@@ -91,7 +91,7 @@ public class WeatherController {
 		int hour = now.getHour();
 		
 		String timeOfDay;
-		if (hour >= 5 && hour < 11) {
+		if (hour >= 5 && hour < 11) {	
 			timeOfDay = "MORNING"; //朝
 		} else if (hour >= 11 && hour < 18) {
 			timeOfDay = "DAY";	//昼
