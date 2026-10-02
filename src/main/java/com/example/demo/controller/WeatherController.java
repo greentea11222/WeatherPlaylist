@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -99,6 +98,8 @@ public class WeatherController {
 			timeOfDay = "NIGHT"; //夜
 		}
 		
+		//アドバイスメッセージ
+		String adviceMessage = generateAdviceMessage(currentStatus, temperature, timeOfDay);
 		//全てのプレイリスト一覧を作成
 		List<Playlist> allPlaylists = new ArrayList<Playlist>();
 		
@@ -208,37 +209,6 @@ public class WeatherController {
 					.collect(Collectors.toList());
 		}
 		
-		//天気と気温に応じたおでかけアドバイスを作成
-		String adviceMessage;
-		if (currentStatus.equals("RAINY")) {
-			adviceMessage = "☔️雨が降っています。傘を持って出かけましょう！";
-		} else if (currentStatus.equals("SNOWY")) {
-			adviceMessage = "❄️雪が降っています。足元に気をつけて、しっかり防寒して出かけましょう。";
-		} else if (temperature >= 28.0) {
-			adviceMessage = "🥤厳しい暑さになりそうです。こまめな水分補給と熱中症対策を！";
-		} else if (temperature <= 10.0) {
-			adviceMessage = "🧥肌寒い日になりそうです。暖かい上着を持ってお出かけください。";
-		} else if (timeOfDay.equals("MORNING") && currentStatus.equals("SUNNY")) {
-			adviceMessage = "☕️爽やかな朝です！気持ちの良い一日のスタートを";
-		} else if (timeOfDay.equals("NIGHT")) {
-			adviceMessage = "🌙今夜は冷え込む可能性があります。暖かくしてお過ごしください。";
-		} else {
-			adviceMessage = "✨お出かけにぴったりの心地よいお天気です！素敵な1日を！";
-		}
-		
-		// 抽出されたプレイリストや曲をランダムにシャッフルする
-		if (!matchedPlaylists.isEmpty()) {
-			// プレイリスト自体をランダムに並び替え
-			Collections.shuffle(matchedPlaylists);
-			
-			// 各プレイリストの中身の曲もランダムに並び替え
-			for (Playlist p : matchedPlaylists) {
-				if (p.getMusicList() != null) {
-					Collections.shuffle(p.getMusicList());
-				}
-			}
-		}
-		
 		// 画面（HTML）にデータを渡す
 		model.addAttribute("cityName", cityName);
 		model.addAttribute("temperature", temperature);
@@ -249,5 +219,24 @@ public class WeatherController {
 		
 		// templates/recommend.htmlを表示する
 		return "recommend";
+	}
+	
+	//天気と気温に応じたおでかけアドバイスを作成
+	private String generateAdviceMessage(String currentStatus, double temperature, String timeOfDay) {
+		if (currentStatus.equals("RAINY")) {
+			 return "☔️雨が降っています。傘を持って出かけましょう！";
+		} else if (currentStatus.equals("SNOWY")) {
+			return "❄️雪が降っています。足元に気をつけて、しっかり防寒して出かけましょう。";
+		} else if (temperature >= 28.0) {
+			return "🥤厳しい暑さになりそうです。こまめな水分補給と熱中症対策を！";
+		} else if (temperature <= 10.0) {
+			return "🧥肌寒い日になりそうです。暖かい上着を持ってお出かけください。";
+		} else if (timeOfDay.equals("MORNING") && currentStatus.equals("SUNNY")) {
+			return "☕️爽やかな朝です！気持ちの良い一日のスタートを";
+		} else if (timeOfDay.equals("NIGHT")) {
+			return "🌙今夜は冷え込む可能性があります。暖かくしてお過ごしください。";
+		} else {
+			return "✨お出かけにぴったりの心地よいお天気です！素敵な1日を！";
+		}
 	}
 }
